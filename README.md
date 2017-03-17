@@ -4,3 +4,6 @@
 AutoUpdateHosts.ahk: 源文件
 
 AutoUpdateHosts.exe: 64位程序。32位程序请自行编译ahk脚本。
+
+
+请以管理员身份运行。运行过程中杀毒软件可能会报警，请自行决定是否使用该程序。
