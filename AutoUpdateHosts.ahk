@@ -37,16 +37,17 @@ SetTimer, RemoveToolTip, 1000
 HostsFile := A_Temp "\hosts"
 
 try {
-	URLDownloadToFile, % URL, % HostsFile
-	if (ErrorLevel == 1)
-		throw Exception("Fail", -1)
+    URLDownloadToFile, % URL, % HostsFile
+    if (ErrorLevel == 1)
+        throw Exception("Fail", -1)
 }
 catch
 {
-	MsgBox, 下载失败，请重新尝试
-	ExitApp
+    MsgBox, 下载失败，请重新尝试
+    ExitApp
 }
 
+; 添加github站点的IP
 FileAppend, 
 (
 `r
@@ -80,7 +81,7 @@ ExitApp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 RemoveToolTip:
-	SetTimer, RemoveToolTip, Off
-	ToolTip
+    SetTimer, RemoveToolTip, Off
+    ToolTip
 Return
 
