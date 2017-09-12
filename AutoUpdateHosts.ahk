@@ -22,7 +22,7 @@ URL := "https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
 FileAppend, 
 (
 `r
-151.101.100.133 raw.githubusercontent.com
+151.101.76.133 raw.githubusercontent.com
 ), % SYSHOSTS
 
 ; 刷新DNS
@@ -37,22 +37,33 @@ SetTimer, RemoveToolTip, 1000
 HostsFile := A_Temp "\hosts"
 
 try {
-    URLDownloadToFile, % URL, % HostsFile
-    if (ErrorLevel == 1)
-        throw Exception("Fail", -1)
+	URLDownloadToFile, % URL, % HostsFile
+	if (ErrorLevel == 1)
+		throw Exception("Fail", -1)
 }
 catch
 {
-    MsgBox, 下载失败，请重新尝试
-    ExitApp
+	; 尝试爬虫方案
+	try {
+		ToolTip, 直接下载失败，尝试爬虫方案, %ToolTipX%, %ToolTipY%
+		RunWait, cmd /c "python gethosts.py",, Hide
+		if (ErrorLevel != 0)
+			throw Exception("Fail", -1)
+		Sleep, 100 ; Wait writing file 
+		FileCopy, hosts.parsed, % HostsFile
+	}
+	catch
+	{
+		MsgBox, 下载失败，请重新尝试
+		ExitApp
+	}
 }
 
-; 添加github站点的IP
 FileAppend, 
 (
 `r
-151.101.100.133 assets-cdn.github.com
-151.101.100.133 raw.githubusercontent.com
+151.101.76.133 assets-cdn.github.com
+151.101.76.133 raw.githubusercontent.com
 ), % HostsFile
 
 ; 备份原来的hosts文件
@@ -72,6 +83,7 @@ RunWait, cmd /c %copyCmd%,, Hide
 
 ; 刷新DNS
 RunWait, cmd /c "ipconfig /flushdns",, Hide
+FileDelete, % HostsFile
 
 MsgBox, 更新完毕!
 ExitApp
@@ -81,7 +93,7 @@ ExitApp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 RemoveToolTip:
-    SetTimer, RemoveToolTip, Off
-    ToolTip
+	SetTimer, RemoveToolTip, Off
+	ToolTip
 Return
 
