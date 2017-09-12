@@ -77,7 +77,8 @@ def require_page_with_http(url, body=None, headers=None):
 if __name__ == "__main__":
     set_auto_cookie()
 
-    page = require_page_with_http('https://github.com/racaljk/hosts/blob/master/hosts')
+    #page = require_page_with_http('https://github.com/racaljk/hosts/blob/master/hosts')
+    page = require_page_with_http('https://github.com/googlehosts/hosts/blob/master/hosts-files/hosts')
 
     # Now we get the web page
     tree = html.fromstring(page)

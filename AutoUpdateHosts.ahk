@@ -15,7 +15,8 @@ SetWorkingDir %A_ScriptDir%
 FileEncoding, UTF-8-RAW
 
 SYSHOSTS := "C:\Windows\System32\drivers\etc\hosts"
-URL := "https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
+;URL := "https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
+URL := "https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts"
 
 ; 手动添加 raw.githubusercontent.com 的IP，否则从这个网站下载文件很困难
 ; 至于这个IP，可以从 http://tool.chinaz.com/dns 上查询，选择速度快的一个
