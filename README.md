@@ -9,4 +9,4 @@
 
 ---
 
-新增爬虫，当 raw.githubusercontent.com 无法访问时，直接从 github.com 页面解析。
+新增爬虫，当 raw.githubusercontent.com 无法访问时，直接从 github.com 页面解析。需要 Python 2.7 支持。
